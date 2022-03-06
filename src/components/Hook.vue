@@ -1,35 +1,40 @@
 <template>
   <div>
-    <h1>{{ name }}</h1>
-    <button @click="ChangeName()">Click Me !</button>
+    <h1>Posts</h1>
+    <div v-for="post in posts" :key="post.id">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Hook",
   data() {
     return {
-      name: " Hook Part",
+      posts: [],
     };
   },
-  methods: {
-    ChangeName() {
-      this.name = "Hook Hook Hook";
-    },
-  },
-  beforeCreate() {
-    alert("Before Created Hook");
-  },
+  methods: {},
   created() {
-    alert("Hook Created");
-  },
-  beforeUpdate() {
-    alert("Before Update");
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => {
+        this.posts = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
+h1 {
+  color: orangered;
+  text-align: center;
+}
 </style>
