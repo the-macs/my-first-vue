@@ -11,6 +11,7 @@ Vue.filter('snippet', val=> {
   val = val.slice(0, 50) + '...'
   return val
 })
+// 
 
 /* eslint-disable no-new */
 new Vue({
